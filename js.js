@@ -1,6 +1,6 @@
 function encriptar(evento) {
     let textoEntrada = document.querySelector("#texto__entrada").value.toLowerCase();
-    textoEntrada = textoEntrada.replaceAll("e", "enter").replaceAll("i", "imes").replaceAll("a", "ai").replaceAll("o", "ober").replaceAll("u", "ufat");
+    textoEntrada = cleanStrings(textoEntrada).replaceAll("e", "enter").replaceAll("i", "imes").replaceAll("a", "ai").replaceAll("o", "ober").replaceAll("u", "ufat");
     document.querySelector("#texto__salida").value = textoEntrada;
     evento.preventDefault();
     console.log(textoEntrada)
@@ -15,7 +15,7 @@ function encriptar(evento) {
 }
 function desencriptar(evento) {
     let textoSalida = document.querySelector("#texto__entrada").value;
-    textoSalida = textoSalida.replaceAll("enter", "e").replaceAll("imes", "i").replaceAll("ai", "a").replaceAll("ober", "o").replaceAll("ufat", "u")
+    textoSalida = cleanStrings(textoSalida).replaceAll("enter", "e").replaceAll("imes", "i").replaceAll("ai", "a").replaceAll("ober", "o").replaceAll("ufat", "u")
     document.querySelector("#texto__salida").value = textoSalida;
     evento.preventDefault();
     console.log(textoSalida);
@@ -34,7 +34,6 @@ function copiar() {
     const mensaje = document.querySelector("#texto__salida");
     mensaje.select();
     navigator.clipboard.writeText(mensaje.value);
-    mensaje.value = "";
     mensajeLogrado('Su mensaje codificado ha sido copiado.')
 }
 
@@ -62,9 +61,10 @@ function mostrarError(mensaje) {
     }, 3000)
 }
 
+function cleanStrings (str){
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase(); 
+}
 document.getElementById("encriptar").addEventListener("click", encriptar);
 document.getElementById("desencriptar").addEventListener("click", desencriptar);
 document.getElementById("copiar").style.display = "none";
 document.getElementById("texto__salida").style.display = "none";
-
-

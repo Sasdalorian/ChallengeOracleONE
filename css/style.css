@@ -95,3 +95,9 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 2rem;
 }
+.insigniaAlura {
+    height: 25rem;
+    position: absolute;
+    left: 80%;
+    top: -0.5%;
+}
